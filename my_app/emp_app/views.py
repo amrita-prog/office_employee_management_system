@@ -1,4 +1,5 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
+from django.contrib import messages
 from .models import Employee, Role, Department, Attendance
 from datetime import datetime
 from django.utils import timezone
@@ -49,7 +50,7 @@ def remove_emp(request, emp_id = 0):
             return redirect('remove_emp_list')
         except Employee.DoesNotExist:
             messages.error(request, "❌ Valid Employee ID nahi mila.")
-            return redirect('remove_emp_list')
+            return redirect('remove_emp')
     
     emps = Employee.objects.all()
     return render(request, 'remove_emp.html', {'emps': emps})
