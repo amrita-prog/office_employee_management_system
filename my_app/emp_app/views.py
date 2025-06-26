@@ -39,19 +39,21 @@ def add_emp(request):
     else :
         return HttpResponse('An Exception Occured! Employee Has Not Been Added')
 
+
 def remove_emp(request, emp_id = 0):
     if emp_id:
         try:
-            emp_to_be_removed = Employee.objects.get(id=emp_id)
-            emp_to_be_removed.delete()
-            return HttpResponse("Employee Removed Successfully!")
-        except:
-            return HttpResponse("Please Enter A Valid Employee Id")
+            emp = Employee.objects.get(id=emp_id)
+            emp.delete()
+            messages.success(request, "✅ Employee Removed Successfully!")
+            return redirect('remove_emp_list')
+        except Employee.DoesNotExist:
+            messages.error(request, "❌ Valid Employee ID nahi mila.")
+            return redirect('remove_emp_list')
+    
     emps = Employee.objects.all()
-    context = {
-        'emps' : emps
-    }
-    return render(request, 'remove_emp.html',context)
+    return render(request, 'remove_emp.html', {'emps': emps})
+
 
 def filter_emp(request):
     if request.method == 'POST':

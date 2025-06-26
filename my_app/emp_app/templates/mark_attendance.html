@@ -67,26 +67,28 @@
       
       <div class="mb-3">
         <label for="employee" class="form-label">Employee</label>
-        <select class="form-select" name="employee" id="employee">
+        <select class="form-select" name="employee" id="employee" required>
+          <option value="">-- Select Employee --</option>
           {% for emp in employees %}
-            <option value="{{ emp.id }}">{{ emp.first_name }}</option>
+            <option value="{{ emp.id }}">{{ emp.first_name }} {{ emp.last_name }}</option>
           {% endfor %}
         </select>
       </div>
 
       <div class="mb-3">
         <label for="check_in" class="form-label">Check-In</label>
-        <input type="time" class="form-control" name="check_in" id="check_in">
+        <input type="time" class="form-control" name="check_in" id="check_in" required>
       </div>
 
       <div class="mb-3">
         <label for="check_out" class="form-label">Check-Out</label>
-        <input type="time" class="form-control" name="check_out" id="check_out">
+        <input type="time" class="form-control" name="check_out" id="check_out" required>
       </div>
 
       <div class="mb-4">
         <label for="status" class="form-label">Status</label>
-        <select class="form-select" name="status" id="status">
+        <select class="form-select" name="status" id="status" required>
+          <option value="">-- Select Status --</option>
           <option value="Present">Present</option>
           <option value="Absent">Absent</option>
         </select>
