@@ -1,0 +1,34 @@
+/* Global custom styles for Employee Management */
+body {
+  background-color: #f7f9fc;
+}
+
+.card-shadow {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.75rem;
+}
+
+.table thead th {
+  background-color: #f1f5f9;
+}
+
+.action-btns .btn {
+  margin-right: 0.25rem;
+}
+
+.modal-confirm .modal-header {
+  border-bottom: 0;
+}
+
+.modal-confirm .modal-footer {
+  border-top: 0;
+}
+
+

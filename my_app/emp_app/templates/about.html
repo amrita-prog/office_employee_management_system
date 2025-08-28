@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}About{% endblock %}
+{% block content %}
+
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-10">
+    <div class="card shadow-lg border-0 rounded-3">
+      <div class="card-body p-5">
+
+        <!-- Heading -->
+        <div class="text-center mb-4">
+          <h2 class="fw-bold text-primary">
+            <i class="fa-solid fa-circle-info me-2"></i> About This Project
+          </h2>
+          <p class="text-muted">A complete Office Employee Management System built with Django & Bootstrap 5</p>
+        </div>
+
+        <!-- Intro -->
+        <p class="lead">
+          The <strong>Office Employee Management System (OEMS)</strong> is a web-based solution 
+          designed to simplify HR and employee workflows. It automates daily operations like 
+          employee records, attendance, leave management, and internal communication. 
+        </p>
+
+        <!-- Objectives -->
+        <h4 class="mt-4"><i class="fa-solid fa-bullseye text-success me-2"></i>Objectives</h4>
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item"><i class="fa-solid fa-check-circle text-primary me-2"></i> Centralized employee data management</li>
+          <li class="list-group-item"><i class="fa-solid fa-check-circle text-primary me-2"></i> Track attendance, leaves, and performance efficiently</li>
+          <li class="list-group-item"><i class="fa-solid fa-check-circle text-primary me-2"></i> Enhance communication between employees and management</li>
+          <li class="list-group-item"><i class="fa-solid fa-check-circle text-primary me-2"></i> Automate payroll and reporting processes</li>
+        </ul>
+
+        <!-- Features -->
+        <h4 class="mt-4"><i class="fa-solid fa-star text-warning me-2"></i> Key Features</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li><i class="fa-solid fa-users text-primary me-2"></i> Employee Management</li>
+              <li><i class="fa-solid fa-calendar-check text-primary me-2"></i> Attendance & Leave Tracking</li>
+              <li><i class="fa-solid fa-comments text-primary me-2"></i> Internal Communication</li>
+              <li><i class="fa-solid fa-briefcase text-primary me-2"></i> Performance & Task Management</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="list-unstyled">
+              <li><i class="fa-solid fa-money-check-dollar text-primary me-2"></i> Payroll Management</li>
+              <li><i class="fa-solid fa-file-lines text-primary me-2"></i> Document Handling</li>
+              <li><i class="fa-solid fa-chart-line text-primary me-2"></i> Reports & Analytics</li>
+              <li><i class="fa-solid fa-user-shield text-primary me-2"></i> Role-Based Access Control</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <h4 class="mt-4"><i class="fa-solid fa-laptop-code text-info me-2"></i> Technologies Used</h4>
+        <p class="text-muted">
+          <b>Backend:</b> Python (Django) <br>
+          <b>Frontend:</b> HTML, CSS, Bootstrap 5 <br>
+          <b>Database:</b> SQLite / MySQL <br>
+          <b>Authentication:</b> Django Auth
+        </p>
+
+        <!-- Footer Note -->
+        <div class="alert alert-info mt-4 mb-0">
+          <i class="fa-solid fa-lightbulb me-2"></i> 
+          This project was built to modernize HR workflows and improve office productivity.
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

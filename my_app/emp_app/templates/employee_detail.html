@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Employee Profile{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card card-shadow">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+          <div class="me-3">
+            <span class="badge bg-primary rounded-circle p-3"><i class="fa-solid fa-user"></i></span>
+          </div>
+          <div>
+            <h3 class="mb-0">{{ employee.first_name }} {{ employee.last_name }}</h3>
+            <div class="text-muted">Employee ID: {{ employee.id }}</div>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <div class="text-muted mb-1">Role</div>
+              <div class="fw-semibold">{{ employee.role.name }}</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <div class="text-muted mb-1">Department</div>
+              <div class="fw-semibold">{{ employee.dept.name }} ({{ employee.dept.location }})</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <div class="text-muted mb-1">Phone</div>
+              <div class="fw-semibold">{{ employee.phone }}</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <div class="text-muted mb-1">Hire Date</div>
+              <div class="fw-semibold">{{ employee.hire_date }}</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <div class="text-muted mb-1">Salary</div>
+              <div class="fw-semibold">{{ employee.salary }}</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="border rounded p-3 h-100">
+              <div class="text-muted mb-1">Bonus</div>
+              <div class="fw-semibold">{{ employee.bonus }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 d-flex gap-2">
+          <a href="{% url 'all_emp' %}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left me-2"></i>Back</a>
+          <a href="/employees/{{ employee.id }}/edit" class="btn btn-info"><i class="fa-regular fa-pen-to-square me-2"></i>Edit</a>
+          <a href="{% url 'remove_emp' employee.id %}" class="btn btn-danger"><i class="fa-regular fa-trash-can me-2"></i>Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

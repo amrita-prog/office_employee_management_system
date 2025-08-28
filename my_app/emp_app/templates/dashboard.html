@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="row g-3 g-md-4">
+  <div class="col-6 col-md-3">
+    <div class="card text-center card-shadow">
+      <div class="card-body">
+        <div class="display-6"><i class="fa-solid fa-users text-primary"></i></div>
+        <div class="mt-2 text-muted">Total Employees</div>
+        <div class="h4 mb-0">{{ stats.total_employees|default:"-" }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card text-center card-shadow">
+      <div class="card-body">
+        <div class="display-6"><i class="fa-solid fa-building text-success"></i></div>
+        <div class="mt-2 text-muted">Departments</div>
+        <div class="h4 mb-0">{{ stats.total_departments|default:"-" }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card text-center card-shadow">
+      <div class="card-body">
+        <div class="display-6"><i class="fa-regular fa-calendar-days text-warning"></i></div>
+        <div class="mt-2 text-muted">This Month Hires</div>
+        <div class="h4 mb-0">{{ stats.hires_this_month|default:"-" }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="card text-center card-shadow">
+      <div class="card-body">
+        <div class="display-6"><i class="fa-solid fa-user-check text-info"></i></div>
+        <div class="mt-2 text-muted">Present Today</div>
+        <div class="h4 mb-0">{{ stats.present_today|default:"-" }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-shadow mt-4">
+  <div class="card-body">
+    <h5 class="mb-3">Recent Employees</h5>
+    {% if recent_employees %}
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr>
+            <th>#</th><th>Name</th><th>Role</th><th>Department</th><th>Hired</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for emp in recent_employees %}
+          <tr>
+            <td>{{ emp.id }}</td>
+            <td>{{ emp.first_name }} {{ emp.last_name }}</td>
+            <td>{{ emp.role.name }}</td>
+            <td>{{ emp.dept.name }}</td>
+            <td>{{ emp.hire_date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <p class="text-muted mb-0">No recent employees.</p>
+    {% endif %}
+  </div>
+  </div>
+
+<div class="card card-shadow mt-4">
+  <div class="card-body">
+    <h5 class="mb-3">Employees Hired by Month</h5>
+    {% if hires_by_month %}
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr><th>Year</th><th>Month</th><th>Total Hires</th></tr>
+        </thead>
+        <tbody>
+          {% for row in hires_by_month %}
+          <tr>
+            <td>{{ row.hire_date__year }}</td>
+            <td>{{ row.hire_date__month }}</td>
+            <td>{{ row.total }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <p class="text-muted mb-0">No hires yet.</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="d-flex gap-2 mt-3">
+  <a href="{% url 'mark_attendance' %}" class="btn btn-primary"><i class="fa-solid fa-clipboard-check me-2"></i>Mark Attendance</a>
+  <a href="{% url 'view_attendance' %}" class="btn btn-outline-secondary"><i class="fa-regular fa-calendar-days me-2"></i>View Attendance</a>
+</div>
+{% endblock %}
+
+

@@ -3,11 +3,37 @@ from django.contrib import messages
 from .models import Employee, Role, Department, Attendance
 from datetime import datetime
 from django.utils import timezone
-from django.db.models import Q
+from django.db.models import Q, Count
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def dashboard(request):
+    today = timezone.now().date()
+    stats = {
+        'total_employees': Employee.objects.count(),
+        'total_departments': Department.objects.count(),
+        'hires_this_month': Employee.objects.filter(hire_date__year=today.year, hire_date__month=today.month).count(),
+        'present_today': Attendance.objects.filter(date=today, status='Present').count(),
+    }
+    recent_employees = Employee.objects.order_by('-hire_date')[:5]
+
+    hires_by_month = (
+        Employee.objects
+        .values('hire_date__year', 'hire_date__month')
+        .annotate(total=Count('id'))
+        .order_by('hire_date__year', 'hire_date__month')
+    )
+
+    return render(request, 'dashboard.html', {
+        'stats': stats,
+        'recent_employees': recent_employees,
+        'hires_by_month': hires_by_month,
+    })
 
 def all_emp(request):
     emps = Employee.objects.all()
@@ -30,8 +56,8 @@ def add_emp(request):
         new_emp = Employee(first_name = first_name,last_name = last_name,salary = salary,bonus = bonus,dept_id = dept,phone = phone,role_id = role,hire_date = datetime.now())
 
         new_emp.save()
-
-        return HttpResponse('Employee Added Successfully')
+        messages.success(request, 'Employee added successfully')
+        return render(request, 'employee_success.html', {'message': 'Employee added successfully'})
     
         
     elif request.method == 'GET':
@@ -39,6 +65,35 @@ def add_emp(request):
     
     else :
         return HttpResponse('An Exception Occured! Employee Has Not Been Added')
+
+def employee_detail(request, emp_id: int):
+    try:
+        employee = Employee.objects.get(id=emp_id)
+    except Employee.DoesNotExist:
+        messages.error(request, 'Employee not found')
+        return redirect('all_emp')
+    return render(request, 'employee_detail.html', {'employee': employee})
+
+def employee_edit(request, emp_id: int):
+    try:
+        employee = Employee.objects.get(id=emp_id)
+    except Employee.DoesNotExist:
+        messages.error(request, 'Employee not found')
+        return redirect('all_emp')
+
+    if request.method == 'POST':
+        employee.first_name = request.POST.get('first_name', employee.first_name)
+        employee.last_name = request.POST.get('last_name', employee.last_name)
+        employee.salary = int(request.POST.get('salary', employee.salary))
+        employee.bonus = int(request.POST.get('bonus', employee.bonus))
+        employee.phone = int(request.POST.get('phone', employee.phone))
+        employee.dept_id = int(request.POST.get('dept', employee.dept_id))
+        employee.role_id = int(request.POST.get('role', employee.role_id))
+        employee.save()
+        messages.success(request, 'Employee updated successfully')
+        return redirect('all_emp')
+
+    return render(request, 'employee_edit.html', {'employee': employee})
 
 
 def remove_emp(request, emp_id = 0):
@@ -52,8 +107,14 @@ def remove_emp(request, emp_id = 0):
             messages.error(request, "❌ Valid Employee ID nahi mila.")
             return redirect('remove_emp')
     
+    query = request.GET.get('q', '').strip()
     emps = Employee.objects.all()
-    return render(request, 'remove_emp.html', {'emps': emps})
+    if query:
+        if query.isdigit():
+            emps = emps.filter(Q(id=int(query)) | Q(phone__icontains=query))
+        else:
+            emps = emps.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
+    return render(request, 'remove_emp.html', {'emps': emps, 'q': query})
 
 
 def filter_emp(request):
