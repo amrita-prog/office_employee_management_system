@@ -43,6 +43,7 @@ def all_emp(request):
     print(context)
     return render(request, 'view_all_emp.html',context)
 
+# Add Employee
 def add_emp(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -66,6 +67,7 @@ def add_emp(request):
     else :
         return HttpResponse('An Exception Occured! Employee Has Not Been Added')
 
+ 
 def employee_detail(request, emp_id: int):
     try:
         employee = Employee.objects.get(id=emp_id)
@@ -96,6 +98,8 @@ def employee_edit(request, emp_id: int):
     return render(request, 'employee_edit.html', {'employee': employee})
 
 
+
+# Remove Employee
 def remove_emp(request, emp_id = 0):
     if emp_id:
         try:
@@ -116,7 +120,7 @@ def remove_emp(request, emp_id = 0):
             emps = emps.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
     return render(request, 'remove_emp.html', {'emps': emps, 'q': query})
 
-
+# Filter Employee
 def filter_emp(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -141,7 +145,7 @@ def filter_emp(request):
     else:
         return HttpResponse('An Exception Occured!')
     
-
+# Mark Attendance
 def mark_attendance(request):
     employees = Employee.objects.all()
     if request.method == 'POST':
