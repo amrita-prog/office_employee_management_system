@@ -63,27 +63,58 @@
       </div>
     </main>
 
-    <footer class="bg-body-tertiary border-top py-4 mt-auto">
-      <div class="container">
-        <div class="row small">
-          <div class="col-md-4 mb-2">
-            <div class="fw-semibold mb-1">About Us</div>
-            <p class="mb-0 text-muted">Simple employee and attendance management built with Django.</p>
+    <footer class="footer-dark bg-dark text-light pt-5 pb-3 mt-auto border-top border-secondary">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-3 mb-4">
+        <div class="fw-semibold mb-2">About Us</div>
+        <p class="mb-0 text-muted">Simple employee and attendance management built with Django. Empower your team. Simplify your workflow.</p>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="fw-semibold mb-2">Links</div>
+        <ul class="list-unstyled">
+          <li><a class="link-secondary text-decoration-none" href="{% url 'about' %}">About</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Contact</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Privacy Policy</a></li>
+          <li><a class="link-secondary text-decoration-none" href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="fw-semibold mb-2">Newsletter</div>
+        <form>
+          <div class="input-group mb-2">
+            <input type="email" class="form-control bg-secondary border-0 text-light" placeholder="Email address">
+            <button class="btn btn-primary" type="submit">Subscribe</button>
           </div>
-          <div class="col-md-4 mb-2">
-            <div class="fw-semibold mb-1">Links</div>
-            <ul class="list-unstyled mb-0">
-              <li><a class="link-secondary text-decoration-none" href="{% url 'about' %}">About</a></li>
-              <li><a class="link-secondary text-decoration-none" href="#">Contact</a></li>
-              <li><a class="link-secondary text-decoration-none" href="#">Privacy Policy</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4 d-flex align-items-end justify-content-md-end">
-            <div>© 2025 Employee Management System</div>
-          </div>
+        </form>
+        <small class="text-secondary">Get updates & announcements.</small>
+      </div>
+
+      <div class="col-md-3 mb-4 d-flex flex-column align-items-md-end">
+        <div class="fw-semibold mb-2">Connect</div>
+        <div>
+          <a href="#" class="me-2 text-light"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="me-2 text-light"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="me-2 text-light"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="text-light"><i class="fab fa-github"></i></a>
         </div>
       </div>
-    </footer>
+
+    </div>
+    <hr class="border-secondary mb-3">
+    <div class="d-flex justify-content-between align-items-center small">
+      <div>© 2025 Employee Management System · All rights reserved.</div>
+      <div>
+        <a href="#" class="link-secondary text-decoration-none me-2">Help</a>
+        <a href="#" class="link-secondary text-decoration-none">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
